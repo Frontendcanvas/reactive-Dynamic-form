@@ -1,0 +1,47 @@
+<div class="container-wrap">
+  <div class="main-header">User Form</div>
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="form-group">
+      <label>Enter Field Name</label>
+      <input
+        class="custom-input"
+        type="text"
+        ngModel
+        name="field"
+        required
+        #firstinput="ngModel"
+      />
+      <!-- @if (f.form.controls['field'].invalid && f.form.controls['field'].touched) -->
+      @if (firstinput.invalid && firstinput.touched){
+      <div class="help-block">please select a valid type</div>
+      }
+    </div>
+    <div class="form-group">
+      <label>Type of the field(text/radio/checkbox/list only)</label>
+      <!-- <input class="custom-input" type="text" ngModel name="ftype" required> -->
+      <select
+        class="custom-select"
+        [ngModel]="defaultType"
+        name="type"
+        required
+        #secondinput="ngModel"
+      >
+        <option value="">Select an option</option>
+        <option value="text">Text</option>
+        <option value="radio">Radio</option>
+        <option value="checkbox">Checkbox</option>
+        <option value="list">List</option>
+      </select>
+      <!-- @if(f.form.controls['type'].valid && f.form.controls.['type'].touched ){
+
+      <div class="help-block">please select a valid type</div>
+      } -->
+      @if (secondinput.invalid && secondinput.touched) {
+      <div class="help-block">Please select a valid type</div>
+      }
+    </div>
+    <button type="submit" [disabled]="f.form.invalid" class="add-btn">
+      Add Field
+    </button>
+  </form>
+</div>
